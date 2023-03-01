@@ -1,5 +1,6 @@
 from datetime import datetime
 from typing import NoReturn
+from colorama import Fore, Style
 
 
 def funcionamento(saldo: float, limite_saque: int=0, extrato: dict={}) -> NoReturn:
@@ -13,49 +14,49 @@ def funcionamento(saldo: float, limite_saque: int=0, extrato: dict={}) -> NoRetu
 
         if operacao == 1:
             if limite_saque >= 3:
-                print("Já foram realizados os 3 saques diários.")
+                print(Fore.RED + "\nJá foram realizados os 3 saques diários." + Style.RESET_ALL)
                 continue
 
             valor: float = float(input("\nValor que deseja sacar: \n")) # input
 
             if valor > 500:
-                print("\nVocê só pode transferir até 500 reais.")
+                print(Fore.RED + "\nVocê só pode transferir até 500 reais." + Style.RESET_ALL)
                 continue
             elif saldo - valor < 0:
-                print("\nSaldo insuficiente.")
+                print(Fore.RED + "\nSaldo insuficiente." + Style.RESET_ALL)
                 continue
             else:
                 saldo -= valor
                 limite_saque += 1
                 extrato[f"{datetime.now()}"] = ["saque", valor, limite_saque]
-                print(F"\nSacando R$ {valor}...")
+                print(Fore.GREEN + f"\nSacando R$ {valor}..." + Style.RESET_ALL)
 
         elif operacao == 2:
             valor: float = float(input("\nValor que deseja depositar: \n")) # input
 
             if valor <= 0:
-                print("\nValor inválido.")
+                print(Fore.RED + "\nValor inválido." + Style.RESET_ALL)
                 continue
             else:
                 saldo += valor
                 extrato[f"{datetime.now()}"] = ["deposito", valor]
-                print(f"\nFoi depositado o valor de R$ {valor} em sua conta...")
+                print(Fore.GREEN + f"\nFoi depositado o valor de R$ {valor} em sua conta..." + Style.RESET_ALL)
                 continue
         
         elif operacao == 3:
             for date, ctx in extrato.items():
                 if ctx[0] == "saque":
-                    print(f"\nOperação de SAQUE\nVALOR: {ctx[1]}\nLIMITE DE SAQUE NA HORA: {ctx[2]-1}/3\nREALIZADA EM: {date}\n")
+                    print(Fore.YELLOW + f"\nOperação de SAQUE\nVALOR: {ctx[1]}\nLIMITE DE SAQUE NA HORA: {ctx[2]-1}/3\nREALIZADA EM: {date}\n" + Style.RESET_ALL)
                 else:
-                    print(f"\nOperação de DEPÓSITO\nVALOR: {ctx[1]}\nREALIZADA EM: {date}\n")
+                    print(Fore.YELLOW + f"\nOperação de DEPÓSITO\nVALOR: {ctx[1]}\nREALIZADA EM: {date}\n" + Style.RESET_ALL)
             
         elif operacao == 4:
-            print(f"\nVocê está saindo do sistema!".upper())
+            print(Fore.GREEN + f"\nVocê está saindo do sistema!".upper() + Style.RESET_ALL)
             return exit()
             
         
         else:
-            print("Opção Inválida. Tente novamente.")
+            print(Fore.RED + "Opção Inválida. Tente novamente." + Style.RESET_ALL)
             continue
 
 if __name__ == "__main__":
