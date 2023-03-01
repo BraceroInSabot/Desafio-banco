@@ -26,6 +26,18 @@ def funcionamento(saldo: float, limite_saque: int=3, extrato: dict={}) -> str:
                 extrato[f"{datetime.now()}"] = ["saque", valor, limite_saque]
                 print(F"\nSacando R$ {valor}...")
 
+        elif operacao == 2:
+            valor: float = float(input("\nValor que deseja depositar: \n")) # input
+
+            if valor <= 0:
+                print("\nValor inválido.")
+                continue
+            else:
+                saldo += valor
+                extrato[f"{datetime.now()}"] = ["deposito", valor]
+                print(f"\nFoi depositado o valor de R$ {valor} em sua conta...")
+                continue
+            
         elif operacao == 4:
             return "\nVocê está saindo do sistema!".upper()
             break
