@@ -2,7 +2,7 @@ from datetime import datetime
 from typing import NoReturn
 
 
-def funcionamento(saldo: float, limite_saque: int=3, extrato: dict={}) -> NoReturn:
+def funcionamento(saldo: float, limite_saque: int=0, extrato: dict={}) -> NoReturn:
     """
     Processa o saque e deposito de dinheiro. Para cada ação, armazena dados sobre ela, que é possível ver expondo o extrato.
     """
