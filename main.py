@@ -7,6 +7,13 @@ def funcionamento(saldo: float, limite_saque: int=0, extrato: dict={}) -> NoRetu
     """
     Processa o saque e deposito de dinheiro. Para cada ação, armazena dados sobre ela, que é possível ver expondo o extrato.
     """
+    print(Fore.YELLOW + """
+        Comandos para realizar as ações:
+        1 - Realizar saque
+        2 - Realizar depósito
+        3 - Expor extrato
+        4 - Sair do sistema
+    """ + Style.RESET_ALL)
     while True:
         print(f"\nValor em conta: {saldo}")
         print(f"Limite de saques diários: {limite_saque}/3")
