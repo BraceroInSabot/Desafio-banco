@@ -17,14 +17,20 @@ def funcionamento(saldo: float, limite_saque: int=0, extrato: dict={}) -> NoRetu
     while True:
         print(f"\nValor em conta: {saldo}")
         print(f"Limite de saques diários: {limite_saque}/3")
-        operacao: int = int(input("\nDigite o número da operação desejada. \n"))# input
+        try:
+            operacao: int = int(input("\nDigite o número da operação desejada. \n"))# input
+        except ValueError as err:
+            print(Fore.RED + f"Houve um erro: {err}" + Style.RESET_ALL)
 
         if operacao == 1:
             if limite_saque >= 3:
                 print(Fore.RED + "\nJá foram realizados os 3 saques diários." + Style.RESET_ALL)
                 continue
-
-            valor: float = float(input("\nValor que deseja sacar: \n")) # input
+            
+            try:
+                valor: float = float(input("\nValor que deseja sacar: \n")) # input
+            except ValueError as err:
+                print(Fore.RED + f"Houve um erro: {err}" + Style.RESET_ALL)
 
             if valor > 500:
                 print(Fore.RED + "\nVocê só pode transferir até 500 reais." + Style.RESET_ALL)
@@ -39,7 +45,10 @@ def funcionamento(saldo: float, limite_saque: int=0, extrato: dict={}) -> NoRetu
                 print(Fore.GREEN + f"\nSacando R$ {valor}..." + Style.RESET_ALL)
 
         elif operacao == 2:
-            valor: float = float(input("\nValor que deseja depositar: \n")) # input
+            try:
+                valor: float = float(input("\nValor que deseja depositar: \n")) # input
+            except ValueError as err:
+                print(Fore.RED + f"Houve um erro: {err}" + Style.RESET_ALL)
 
             if valor <= 0:
                 print(Fore.RED + "\nValor inválido." + Style.RESET_ALL)
