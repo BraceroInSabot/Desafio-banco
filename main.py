@@ -1,7 +1,11 @@
 from datetime import datetime
+from typing import NoReturn
 
 
-def funcionamento(saldo: float, limite_saque: int=3, extrato: dict={}) -> str:
+def funcionamento(saldo: float, limite_saque: int=3, extrato: dict={}) -> NoReturn:
+    """
+    Processa o saque e deposito de dinheiro. Para cada ação, armazena dados sobre ela, que é possível ver expondo o extrato.
+    """
     while True:
         print(f"\nValor em conta: {saldo}")
         print(f"Limite de saques diários: {limite_saque}/3")
@@ -37,14 +41,22 @@ def funcionamento(saldo: float, limite_saque: int=3, extrato: dict={}) -> str:
                 extrato[f"{datetime.now()}"] = ["deposito", valor]
                 print(f"\nFoi depositado o valor de R$ {valor} em sua conta...")
                 continue
+        
+        elif operacao == 3:
+            for date, ctx in extrato.items():
+                if ctx[0] == "saque":
+                    print(f"\nOperação de SAQUE\nVALOR: {ctx[1]}\nLIMITE DE SAQUE NA HORA: {ctx[2]-1}/3\nREALIZADA EM: {date}\n")
+                else:
+                    print(f"\nOperação de DEPÓSITO\nVALOR: {ctx[1]}\nREALIZADA EM: {date}\n")
             
         elif operacao == 4:
-            return "\nVocê está saindo do sistema!".upper()
-            break
+            print(f"\nVocê está saindo do sistema!".upper())
+            return exit()
+            
         
         else:
             print("Opção Inválida. Tente novamente.")
-
+            continue
 
 if __name__ == "__main__":
     saldo = 100
