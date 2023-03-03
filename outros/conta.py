@@ -6,6 +6,16 @@ from typing import NoReturn
 contas = []
 
 
+def filtrar_conta(cpf, numero_conta):
+    if [conta for conta in contas if conta["numero_conta"] == numero_conta]:
+        if [conta for conta in contas if conta["usuario"]["cpf"] == cpf]:
+            return True
+        else:
+            return False
+    else:
+        return False
+
+
 def criar_conta() -> NoReturn:
     while True:
         cpf = str(input("Válide o seu CPF: "))
@@ -20,6 +30,7 @@ def criar_conta() -> NoReturn:
             "agencia": "0001",
             "numero_conta": random_id,
             "usuario": usuario_filtrado,
+            "saldo": 0.0,
         }
         contas.append(conta)
 

@@ -39,19 +39,7 @@ def funcionamento(saldo: float, limite_saque: int=0, extrato: dict={}) -> NoRetu
                 print(Fore.GREEN + f"\nSacando R$ {valor}..." + Style.RESET_ALL)
 
         elif operacao == 2:
-            try:
-                valor: float = float(input("\nValor que deseja depositar: \n")) # input
-            except ValueError as err:
-                print(Fore.RED + f"Houve um erro: {err}" + Style.RESET_ALL)
-
-            if valor <= 0:
-                print(Fore.RED + "\nValor inválido." + Style.RESET_ALL)
-                continue
-            else:
-                saldo += valor
-                extrato[f"{datetime.now()}"] = ["deposito", valor]
-                print(Fore.GREEN + f"\nFoi depositado o valor de R$ {valor} em sua conta..." + Style.RESET_ALL)
-                continue
+            
         
         elif operacao == 3:
             for date, ctx in extrato.items():
@@ -115,7 +103,6 @@ def main():
 
 
 if __name__ == "__main__":
-    saldo = 100
     limite_saque = 0
     extrato = {}
 

@@ -9,6 +9,7 @@ usuarios = [
         "cpf": "123",
         "data_de_nascimento": "12062003",
         "endereço": "Rua tal",
+        "saldo": 100,
     },
     {
         "cpf": "456",
