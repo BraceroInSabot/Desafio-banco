@@ -9,7 +9,7 @@ dados = dict()
 
 def saque():
     data = datetime.now()
-    id = str(uuid4().int)[0:10]
+    id_saque = str(uuid4().int)[0:10]
     while True:
         try:
             cpf: str = str(input("\nInforme o CPF da conta destinada o saque: "))
@@ -79,7 +79,7 @@ def saque():
                     return False
                 else:
                     operacao_dados = {
-                        "id_saque": id,
+                        "id_saque": id_saque,
                         "horario_feito": f"{data}",
                         "tipo_acao": "saque",
                         "quantia": valor,
@@ -95,7 +95,7 @@ def saque():
                         Sacando R$ {valor}...
 
                         HORARIO: {data}
-                        ID DA TRANSIÇÃO: {id}
+                        ID DA TRANSIÇÃO: {id_saque}
                         """
                         + Style.RESET_ALL
                     )

@@ -3,11 +3,15 @@ import usuario
 from colorama import Fore, Style
 from conta import filtrar_conta, contas
 from datetime import datetime
+from uuid import uuid4
 
 dados = dict()
 
 
 def deposito():
+    data = datetime.now()
+    id_deposito = str(uuid4().int)[0:10]
+
     while True:
         try:
             cpf: str = str(input("\nInforme o CPF da conta destinada o depósito: "))
@@ -59,7 +63,8 @@ def deposito():
                     conta.update({"saldo": operacao_deposito})
 
                     operacao_dados = {
-                        "horario_feito": f"{datetime.now()}",
+                        "id_deposito": id_deposito,
+                        "horario_feito": data,
                         "tipo_acao": "deposito",
                         "quantia": valor,
                     }
@@ -70,7 +75,9 @@ def deposito():
                         + f"""
                     Foi depositado o valor de R$ {valor} em sua conta.
 
-                    Saldo atual: {conta["saldo"]}
+                    SALDO ATUAL: {conta["saldo"]}
+                    HORARIO: {data}
+                    ID DA TRANSIÇÃO: {id_deposito}
                     """
                         + Style.RESET_ALL
                     )
