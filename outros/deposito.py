@@ -1,7 +1,9 @@
 from colorama import Fore, Style
-from usuario import filtrar_usuario
-from conta import filtrar_conta, contas
+from .usuario import filtrar_usuario
+from .conta import filtrar_conta, contas
 from datetime import datetime
+
+dados = dict()
 
 
 def deposito():
@@ -49,11 +51,12 @@ def deposito():
                     operacao_deposito += valor
                     conta.update({"saldo": operacao_deposito})
 
-                    data = {
+                    operacao_dados = {
                         "horario_feito": f"{datetime.now()}",
                         "tipo_acao": "deposito",
                         "quantia": valor,
                     }
+                    dados.update(operacao_dados)
 
                     print(
                         Fore.GREEN
@@ -65,4 +68,4 @@ def deposito():
                         + Style.RESET_ALL
                     )
 
-            return data
+            return

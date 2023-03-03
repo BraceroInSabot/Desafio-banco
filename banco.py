@@ -3,6 +3,7 @@ from typing import NoReturn
 from colorama import Fore, Style
 from outros.usuario import criar_usuario, listar_usuario
 from outros.conta import criar_conta
+from outros.deposito import deposito, dados
 
 
 """
@@ -60,6 +61,8 @@ def funcionamento(saldo: float, limite_saque: int=0, extrato: dict={}) -> NoRetu
 
 
 def main():
+    extrato: dict = {}
+
     while True:
         menu = str(
             input(
@@ -85,8 +88,9 @@ def main():
             # função Saque
             pass
         elif menu == "2":
-            # função deposito
-            pass
+            deposito()
+            extrato.update(dados)
+            dados.clear()
         elif menu == "3":
             # função extrato
             pass
@@ -104,6 +108,5 @@ def main():
 
 if __name__ == "__main__":
     limite_saque = 0
-    extrato = {}
 
     main()
