@@ -1,19 +1,13 @@
 from datetime import datetime
 from typing import NoReturn
 from colorama import Fore, Style
+from outros.usuario import criar_usuario, listar_usuario
+from outros.conta import criar_conta
 
 
+"""
 def funcionamento(saldo: float, limite_saque: int=0, extrato: dict={}) -> NoReturn:
-    """
-    Processa o saque e deposito de dinheiro. Para cada ação, armazena dados sobre ela, que é possível ver expondo o extrato.
-    """
-    print(Fore.YELLOW + """
-        Comandos para realizar as ações:
-        1 - Realizar saque
-        2 - Realizar depósito
-        3 - Expor extrato
-        4 - Sair do sistema
-    """ + Style.RESET_ALL)
+
     while True:
         print(f"\nValor em conta: {saldo}")
         print(f"Limite de saques diários: {limite_saque}/3")
@@ -74,10 +68,55 @@ def funcionamento(saldo: float, limite_saque: int=0, extrato: dict={}) -> NoRetu
         else:
             print(Fore.RED + "Opção Inválida. Tente novamente." + Style.RESET_ALL)
             continue
+"""
+
+
+def main():
+    while True:
+        menu = str(
+            input(
+                Fore.YELLOW
+                + """
+            Digite os comandos para realizar as ações:
+
+            [1 ou saque] - Realizar saque
+            [2 ou deposito] - Realizar depósito
+            [3 ou extrato] - Expor extrato
+            [4 ou info] - Retorna informações do usuário logado
+            [5 ou usuario] - Cria um novo usuario
+            [6 ou conta] - Crie uma nova conta (válido apenas para usuarios cadastrados)
+
+            [SAIR] - Sair do sistema
+
+        """
+                + Style.RESET_ALL
+            )
+        )
+
+        if menu == "1":
+            # função Saque
+            pass
+        elif menu == "2":
+            # função deposito
+            pass
+        elif menu == "3":
+            # função extrato
+            pass
+        elif menu == "4":
+            listar_usuario()
+        elif menu == "5":
+            criar_usuario()
+        elif menu == "6":
+            criar_conta()
+        elif menu == "SAIR":
+            return exit
+        else:
+            print("Comando inválido, por favor tente novamente.")
+
 
 if __name__ == "__main__":
     saldo = 100
     limite_saque = 0
     extrato = {}
-    
-    funcionamento(saldo=saldo)
+
+    main()
