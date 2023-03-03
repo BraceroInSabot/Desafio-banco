@@ -1,6 +1,7 @@
 from colorama import Fore, Style
 from usuario import filtrar_usuario
-from conta import filtrar_conta
+from conta import filtrar_conta, contas
+from datetime import datetime
 
 
 def deposito():
@@ -24,17 +25,44 @@ def deposito():
 
             valor: float = float(input("\nValor que deseja depositar: "))
         except ValueError as err:
-            print(Fore.RED + f"Houve um erro: {err}" + Style.RESET_ALL)
+            print(
+                Fore.RED
+                + f"""
+                Houve um erro: {err}
+            """
+                + Style.RESET_ALL
+            )
 
         if valor <= 0:
-            print(Fore.RED + "\nValor inválido." + Style.RESET_ALL)
-            continue
-        else:
-            saldo += valor
-            extrato[f"{datetime.now()}"] = ["deposito", valor]
             print(
-                Fore.GREEN
-                + f"\nFoi depositado o valor de R$ {valor} em sua conta..."
+                Fore.RED
+                + """
+                Valor inválido.
+            """
                 + Style.RESET_ALL
             )
             continue
+        else:
+            for conta in contas:
+                if conta["numero_conta"] == numero_conta:
+                    operacao_deposito: float = conta["saldo"]
+                    operacao_deposito += valor
+                    conta.update({"saldo": operacao_deposito})
+
+                    data = {
+                        "horario_feito": f"{datetime.now()}",
+                        "tipo_acao": "deposito",
+                        "quantia": valor,
+                    }
+
+                    print(
+                        Fore.GREEN
+                        + f"""
+                    Foi depositado o valor de R$ {valor} em sua conta.
+
+                    Saldo atual: {conta["saldo"]}
+                    """
+                        + Style.RESET_ALL
+                    )
+
+            return data

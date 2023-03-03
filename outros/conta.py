@@ -3,7 +3,20 @@ from colorama import Style, Fore
 from uuid import uuid4
 from typing import NoReturn
 
-contas = []
+contas = [
+    {
+        "agencia": "0001",
+        "numero_conta": "456",
+        "usuario": {
+            "id": "15632",
+            "nome": "Guilherme",
+            "cpf": "123",
+            "data_de_nascimento": "12062003",
+            "endereço": "Rua tal",
+        },
+        "saldo": 0.0,
+    }
+]
 
 
 def filtrar_conta(cpf, numero_conta):
