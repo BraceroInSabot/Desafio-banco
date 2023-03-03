@@ -99,7 +99,5 @@ def saque():
                         """
                         + Style.RESET_ALL
                     )
-                    print("\n" + dados)
 
-
-saque()
+                    return dados

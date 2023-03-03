@@ -64,8 +64,9 @@ def main():
         )
 
         if menu == "1":
-            # função Saque
-            pass
+            saque.saque()
+            extrato.update(saque.dados)
+            saque.dados.clear()
         elif menu == "2":
             deposito.deposito()
             extrato.update(deposito.dados)
