@@ -1,9 +1,7 @@
 from datetime import datetime
 from typing import NoReturn
 from colorama import Fore, Style
-from outros.usuario import criar_usuario, listar_usuario
-from outros.conta import criar_conta
-from outros.deposito import deposito, dados
+import outros.usuario as usuario, outros.conta as conta, outros.deposito as deposito, outros.saque as saque
 
 
 """
@@ -18,26 +16,7 @@ def funcionamento(saldo: float, limite_saque: int=0, extrato: dict={}) -> NoRetu
             print(Fore.RED + f"Houve um erro: {err}" + Style.RESET_ALL)
 
         if operacao == 1:
-            if limite_saque >= 3:
-                print(Fore.RED + "\nJá foram realizados os 3 saques diários." + Style.RESET_ALL)
-                continue
             
-            try:
-                valor: float = float(input("\nValor que deseja sacar: \n")) # input
-            except ValueError as err:
-                print(Fore.RED + f"Houve um erro: {err}" + Style.RESET_ALL)
-
-            if valor > 500:
-                print(Fore.RED + "\nVocê só pode transferir até 500 reais." + Style.RESET_ALL)
-                continue
-            elif saldo - valor < 0:
-                print(Fore.RED + "\nSaldo insuficiente." + Style.RESET_ALL)
-                continue
-            else:
-                saldo -= valor
-                limite_saque += 1
-                extrato[f"{datetime.now()}"] = ["saque", valor, limite_saque]
-                print(Fore.GREEN + f"\nSacando R$ {valor}..." + Style.RESET_ALL)
 
         elif operacao == 2:
             
@@ -88,18 +67,18 @@ def main():
             # função Saque
             pass
         elif menu == "2":
-            deposito()
-            extrato.update(dados)
-            dados.clear()
+            deposito.deposito()
+            extrato.update(deposito.dados)
+            deposito.dados.clear()
         elif menu == "3":
             # função extrato
             pass
         elif menu == "4":
-            listar_usuario()
+            usuario.listar_usuario()
         elif menu == "5":
-            criar_usuario()
+            usuario.criar_usuario()
         elif menu == "6":
-            criar_conta()
+            conta.criar_conta()
         elif menu == "SAIR":
             return exit
         else:
@@ -107,6 +86,4 @@ def main():
 
 
 if __name__ == "__main__":
-    limite_saque = 0
-
     main()

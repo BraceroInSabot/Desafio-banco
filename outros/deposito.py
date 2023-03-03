@@ -1,6 +1,7 @@
+import usuario
+
 from colorama import Fore, Style
-from .usuario import filtrar_usuario
-from .conta import filtrar_conta, contas
+from conta import filtrar_conta, contas
 from datetime import datetime
 
 dados = dict()
@@ -10,7 +11,7 @@ def deposito():
     while True:
         try:
             cpf: str = str(input("\nInforme o CPF da conta destinada o depósito: "))
-            if not filtrar_usuario(cpf=cpf, id=None):
+            if not usuario.filtrar_usuario(cpf=cpf, id=None):
                 print(
                     Fore.RED
                     + """
@@ -23,7 +24,13 @@ def deposito():
                 input("\nInforme o número da conta destinada o depósito: ")
             )
             if not filtrar_conta(cpf=cpf, numero_conta=numero_conta):
-                pass
+                print(
+                    Fore.RED
+                    + """
+                        Conta não encontrada no sistema!
+                    """
+                    + Style.RESET_ALL
+                )
 
             valor: float = float(input("\nValor que deseja depositar: "))
         except ValueError as err:

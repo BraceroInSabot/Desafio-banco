@@ -1,4 +1,4 @@
-from .usuario import filtrar_usuario, usuarios
+import usuario
 from colorama import Style, Fore
 from uuid import uuid4
 from typing import NoReturn
@@ -15,6 +15,7 @@ contas = [
             "endereço": "Rua tal",
         },
         "saldo": 0.0,
+        "limite_saque": 3,
     }
 ]
 
@@ -33,17 +34,20 @@ def criar_conta() -> NoReturn:
     while True:
         cpf = str(input("Válide o seu CPF: "))
 
-        if not filtrar_usuario(cpf=cpf, id=None):
+        if not usuario.filtrar_usuario(cpf=cpf, id=None):
             print("Usuário não cadastrado! Volte e faça o cadastro.")
             return
 
-        usuario_filtrado = [usuario for usuario in usuarios if usuario["cpf"] == cpf]
+        usuario_filtrado = [
+            usuario for usuario in usuario.usuarios if usuario["cpf"] == cpf
+        ]
         random_id = str(uuid4().int)[0:12]
         conta = {
             "agencia": "0001",
             "numero_conta": random_id,
             "usuario": usuario_filtrado,
             "saldo": 0.0,
+            "limite_saque": 3,
         }
         contas.append(conta)
 
