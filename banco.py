@@ -1,6 +1,7 @@
 from datetime import datetime
 from typing import NoReturn
 from colorama import Fore, Style
+from time import sleep
 import outros.usuario as usuario, outros.conta as conta, outros.deposito as deposito, outros.saque as saque
 
 
@@ -40,7 +41,7 @@ def funcionamento(saldo: float, limite_saque: int=0, extrato: dict={}) -> NoRetu
 
 
 def main():
-    extrato: dict = {}
+    extratos: list = []
 
     while True:
         menu = str(
@@ -65,15 +66,45 @@ def main():
 
         if menu == "1":
             saque.saque()
-            extrato.update(saque.dados)
+            extratos.append(saque.dados)
             saque.dados.clear()
         elif menu == "2":
             deposito.deposito()
-            extrato.update(deposito.dados)
+            extratos.append(deposito.dados)
             deposito.dados.clear()
         elif menu == "3":
-            # função extrato
-            pass
+            for extrato in extratos:
+                if extrato["operacao"] == "saque":
+                    print(
+                        Fore.CYAN
+                        + f"""
+                                {extrato["operacao"].upper()}
+
+                        VALOR: R$ {extrato["quantia"]}
+                        FEITO EM: {extrato["horario_feito"]}
+
+                        ID: {extrato["id"]}
+
+                        ======================================
+                    """
+                        + Style.RESET_ALL
+                    )
+                else:
+                    print(
+                        Fore.CYAN
+                        + f"""
+                                {extrato["operacao"].upper()}
+
+                        VALOR: R$ {extrato["quantia"]}
+                        FEITO EM: {extrato["horario_feito"]}
+
+                        ID: {extrato["id"]}
+
+                        ======================================
+                        """
+                        + Style.RESET_ALL
+                    )
+            sleep(5)
         elif menu == "4":
             usuario.listar_usuario()
         elif menu == "5":

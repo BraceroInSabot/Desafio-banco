@@ -1,7 +1,7 @@
-import usuario
+import outros.usuario as usuario
 
 from colorama import Fore, Style
-from conta import filtrar_conta, contas
+from outros.conta import filtrar_conta, contas
 from datetime import datetime
 from uuid import uuid4
 
@@ -63,7 +63,7 @@ def deposito():
                     conta.update({"saldo": operacao_deposito})
 
                     operacao_dados = {
-                        "id_deposito": id_deposito,
+                        "id": id_deposito,
                         "horario_feito": data,
                         "tipo_acao": "deposito",
                         "quantia": valor,

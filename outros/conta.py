@@ -1,4 +1,4 @@
-import usuario
+import outros.usuario as usuario
 from colorama import Style, Fore
 from uuid import uuid4
 from typing import NoReturn

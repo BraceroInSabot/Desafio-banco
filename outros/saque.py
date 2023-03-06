@@ -1,5 +1,5 @@
-import usuario
-from conta import filtrar_conta, contas
+import outros.usuario as usuario
+from outros.conta import filtrar_conta, contas
 from colorama import Fore, Style
 from datetime import datetime
 from uuid import uuid4
@@ -79,8 +79,8 @@ def saque():
                     return False
                 else:
                     operacao_dados = {
-                        "id_saque": id_saque,
-                        "horario_feito": f"{data}",
+                        "id": id_saque,
+                        "horario_feito": data,
                         "tipo_acao": "saque",
                         "quantia": valor,
                     }
